@@ -1,7 +1,11 @@
 import { Button, Col, Link, ListGroup, PropTypes, Row } from "../../imports";
 import MessageBox from "../Shared/MessageBox";
 
-const ItemsInCart = ({ cartItems, updateCartHandler }) => {
+const ItemsInCart = ({
+  cartItems,
+  updateCartHandler,
+  removeProductHandler,
+}) => {
   return (
     <div>
       {cartItems.length === 0 ? (
@@ -40,7 +44,14 @@ const ItemsInCart = ({ cartItems, updateCartHandler }) => {
                   </Button>
                 </Col>
                 <Col md={1}>${item.price}</Col>
-                <Col md={1}>{/*Garbage bin */}</Col>
+                <Col md={1}>
+                  <Button
+                    variant="light"
+                    onClick={() => removeProductHandler(item)}
+                  >
+                    <i className="fas fa-trash" />
+                  </Button>
+                </Col>
               </Row>
             </ListGroup.Item>
           ))}
@@ -52,5 +63,6 @@ const ItemsInCart = ({ cartItems, updateCartHandler }) => {
 ItemsInCart.propTypes = {
   cartItems: PropTypes.array,
   updateCartHandler: PropTypes.func,
+  removeProductHandler: PropTypes.func,
 };
 export default ItemsInCart;
