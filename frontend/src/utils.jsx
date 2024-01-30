@@ -16,7 +16,6 @@ const addToCartHandler = async (product, cartItems, ctxDispatch) => {
 
     if (data.countInStock < quantity) {
       alert("Sorry, product is out of stock");
-      console.log("At try addToCartHandler in if");
       return;
     }
     ctxDispatch({
