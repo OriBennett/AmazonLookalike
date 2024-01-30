@@ -1,6 +1,6 @@
 import { Button, Card, ListGroup, PropTypes } from "../../imports";
 
-const Checkout = ({ cartItems }) => {
+const Checkout = ({ cartItems , checkOutHandler}) => {
   return (
     <Card>
       <Card.Body>
@@ -21,6 +21,7 @@ const Checkout = ({ cartItems }) => {
                 type="button"
                 disabled={cartItems.length === 0}
                 variant="primary"
+                onClick={() => checkOutHandler()}
               >
                 Checkout
               </Button>
@@ -34,6 +35,7 @@ const Checkout = ({ cartItems }) => {
 
 Checkout.propTypes = {
   cartItems: PropTypes.array,
+  checkOutHandler: PropTypes.func
 };
 
 export default Checkout;
