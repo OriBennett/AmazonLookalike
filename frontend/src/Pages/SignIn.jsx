@@ -5,7 +5,7 @@ import Title from "../Components/Shared/Title";
 import Form from "react-bootstrap/Form";
 import { Button, Link, toast } from "../imports";
 import { getError } from "../utils";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import { USER_SIGNIN } from "../actions";
 
@@ -14,6 +14,10 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { dispatch: ctxDispatch } = useContext(Store);
+  const { search } = useLocation();
+  const redirectUrl = new URLSearchParams(search);
+  const redirectValue = redirectUrl.get("redirect");
+  const redirect = redirectValue ? redirectValue : "/";
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ const SignIn = () => {
       });
       ctxDispatch({ type: USER_SIGNIN, payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      navigate("/");
+      navigate(redirect);
     } catch (error) {
       toast.error(getError(error));
     }
