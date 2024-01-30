@@ -64,6 +64,5 @@ ItemsInCart.propTypes = {
   cartItems: PropTypes.array,
   updateCartHandler: PropTypes.func,
   removeProductHandler: PropTypes.func,
-  
 };
 export default ItemsInCart;

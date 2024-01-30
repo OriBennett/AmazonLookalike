@@ -34,7 +34,9 @@ const CartDescription = ({ product, addToCart }) => {
           {product.countInStock > 0 && (
             <ListGroup.Item>
               <div className="d-grid">
-                <Button onClick={() => addToCart()} variant="primary">Add to Cart</Button>
+                <Button onClick={() => addToCart()} variant="primary">
+                  Add to Cart
+                </Button>
               </div>
             </ListGroup.Item>
           )}

@@ -1,6 +1,6 @@
 import { Button, Card, ListGroup, PropTypes } from "../../imports";
 
-const Checkout = ({ cartItems , checkOutHandler}) => {
+const Checkout = ({ cartItems, checkOutHandler }) => {
   return (
     <Card>
       <Card.Body>
@@ -35,7 +35,7 @@ const Checkout = ({ cartItems , checkOutHandler}) => {
 
 Checkout.propTypes = {
   cartItems: PropTypes.array,
-  checkOutHandler: PropTypes.func
+  checkOutHandler: PropTypes.func,
 };
 
 export default Checkout;
