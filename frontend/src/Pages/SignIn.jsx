@@ -65,7 +65,7 @@ const SignIn = () => {
           <Button type="submit">Sign In</Button>
         </div>
         <div className="mb-3">
-          New customer? <Link to="/signup">Create your account</Link>
+          New customer? <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
         </div>
         <div className="mb-3">
           Forgot your Password? <Link to="/reset">Reset password</Link>
