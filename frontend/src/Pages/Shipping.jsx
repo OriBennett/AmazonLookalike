@@ -4,6 +4,7 @@ import { Store } from "../Store";
 import Title from "../Components/Shared/Title";
 import CheckoutSteps from "../Components/Shared/CheckoutSteps";
 import { Button, Container, Form } from "../imports";
+import { SAVE_SHIPPING_ADDRESS } from "../actions";
 
 const Shipping = () => {
   const navigate = useNavigate();
@@ -21,13 +22,23 @@ const Shipping = () => {
     }
   }, [cartItems.length, navigate, userInfo]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    ctxDispatch({type: SAVE_SHIPPING_ADDRESS, payload: data});
+    navigate("/payment");
+  };
+
+
+
   return (
     <div>
       <Title title="Shipping Details"></Title>
       <CheckoutSteps step1 step2 />
       <Container className="small-container">
-        <h1>Shipping Address</h1>
-        <Form>
+        <h1 className="my-3">Shipping Address</h1>
+        <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3">
             <Form.Label>Full Name:</Form.Label>
             <Form.Control name="fullName" required></Form.Control>
@@ -49,7 +60,7 @@ const Shipping = () => {
             <Form.Control name="country" required></Form.Control>
           </Form.Group>
           <div className="mb-3">
-            <Button variant="primary">Continue</Button>
+            <Button variant="primary" type="submit">Continue</Button>
           </div>
         </Form>
       </Container>
