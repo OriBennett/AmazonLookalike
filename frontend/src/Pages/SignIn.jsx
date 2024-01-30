@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Title from "../Components/Shared/Title";
@@ -13,11 +13,17 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { dispatch: ctxDispatch } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {userInfo} = state;
   const { search } = useLocation();
   const redirectUrl = new URLSearchParams(search);
   const redirectValue = redirectUrl.get("redirect");
   const redirect = redirectValue ? redirectValue : "/";
+  useEffect(() => {
+    if (userInfo)
+    navigate(redirect);
+  }, [navigate, redirect, userInfo])
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();
