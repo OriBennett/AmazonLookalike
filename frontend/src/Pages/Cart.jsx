@@ -3,6 +3,7 @@ import { Store } from "../Store";
 import Title from "../Components/Shared/Title";
 import { Col, Row } from "../imports";
 import ItemsInCart from "../Components/CartPage/ItemsInCart";
+import Checkout from "../Components/CartPage/Checkout";
 
 
 const Cart = () => {
@@ -16,7 +17,7 @@ const Cart = () => {
       <Title title={"Shopping Cart"}></Title>
       <Row>
         <Col md={8}><ItemsInCart cartItems={cartItems} updateCartHandler={updateCartHandler}/></Col>
-        <Col md={4}><Checkout/></Col>
+        <Col md={4}><Checkout cartItems={cartItems}/></Col>
       </Row>
     </div>
   );

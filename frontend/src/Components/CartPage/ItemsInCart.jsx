@@ -28,11 +28,19 @@ const ItemsInCart = ({ cartItems, updateCartHandler }) => {
                     disabled={item.quantity === 1}
                     variant="light"
                   >
-                    <i className="fa fa-minus-circle"/>
+                    <i className="fa fa-minus-circle" />
+                  </Button>{" "}
+                  <span>{item.quantity}</span>{" "}
+                  <Button
+                    onClick={() => updateCartHandler(item, item.quantity + 1)}
+                    name="plusButton"
+                    variant="light"
+                  >
+                    <i className="fa fa-plus-circle" />
                   </Button>
                 </Col>
-                <Col md={1}></Col>
-                <Col md={1}></Col>
+                <Col md={1}>${item.price}</Col>
+                <Col md={1}>{/*Garbage bin */}</Col>
               </Row>
             </ListGroup.Item>
           ))}
