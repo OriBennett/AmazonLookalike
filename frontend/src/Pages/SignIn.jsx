@@ -14,16 +14,14 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const {userInfo} = state;
+  const { userInfo } = state;
   const { search } = useLocation();
   const redirectUrl = new URLSearchParams(search);
   const redirectValue = redirectUrl.get("redirect");
   const redirect = redirectValue ? redirectValue : "/";
   useEffect(() => {
-    if (userInfo)
-    navigate(redirect);
-  }, [navigate, redirect, userInfo])
-  
+    if (userInfo) navigate(redirect);
+  }, [navigate, redirect, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -65,7 +63,8 @@ const SignIn = () => {
           <Button type="submit">Sign In</Button>
         </div>
         <div className="mb-3">
-          New customer? <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          New customer?{" "}
+          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
         </div>
         <div className="mb-3">
           Forgot your Password? <Link to="/reset">Reset password</Link>

@@ -87,7 +87,8 @@ const SignUp = () => {
           <Button type="submit">Sign Up</Button>
         </div>
         <div className="mb-3">
-          Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign in</Link>
+          Already have an account?{" "}
+          <Link to={`/signin?redirect=${redirect}`}>Sign in</Link>
         </div>
       </Form>
     </Container>
