@@ -5,6 +5,7 @@ import { Col, Row, axios, toast } from "../imports";
 import ItemsInCart from "../Components/CartPage/ItemsInCart";
 import Checkout from "../Components/CartPage/Checkout";
 import { PRODUCT_ADD_TO_CART } from "../actions";
+import { getError } from "../utils";
 
 
 const Cart = () => {
@@ -25,7 +26,7 @@ const Cart = () => {
           payload: { ...product, quantity },
         });
       } catch (error) {
-        toast(error.message);
+        toast.error(getError(error));
       }
   };
   return (
