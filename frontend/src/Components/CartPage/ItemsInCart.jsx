@@ -17,12 +17,14 @@ const ItemsInCart = ({
           {cartItems.map((item) => (
             <ListGroup.Item key={item._id}>
               <Row>
-                <Col md={8}>
+                <Col md={3}>
                   <img
                     src={item.image}
                     alt={item.title}
                     className="img-fluid rounded img-thumbnail"
                   />
+                </Col>
+                <Col md={5}>
                   <Link to={`/products/${item.token}`}>{item.title}</Link>
                 </Col>
                 <Col md={2}>
