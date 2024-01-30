@@ -27,8 +27,13 @@ const Header = () => {
     <header>
       <NavBar bg="dark" variant="dark">
         <Container>
-        <Link onClick={() => navigate(-1)}>
-                            {location.pathname !== '/' && <i className="fa fa-arrow-left text-white align-arrow-right"> Back</i>}
+          <Link onClick={() => navigate(-1)}>
+            {location.pathname !== "/" && (
+              <i className="fa fa-arrow-left text-white align-arrow-right">
+                {" "}
+                Back
+              </i>
+            )}
           </Link>
           <LinkContainer to="/">
             <NavBar.Brand>
@@ -43,7 +48,11 @@ const Header = () => {
           <nav className="d-flex align-items-center justify-content-end me-2 ms-4">
             <Link to="/cart" className="nav-link">
               <i className="fa fa-shopping-cart text-white"></i>
-              {cartItems.length>0 && (<Badge pill bg = "danger">{cartItems.reduce((a, c) => a + c.quantity, 0)}</Badge>)}
+              {cartItems.length > 0 && (
+                <Badge pill bg="danger">
+                  {cartItems.reduce((a, c) => a + c.quantity, 0)}
+                </Badge>
+              )}
             </Link>
           </nav>
           {userInfo ? (
