@@ -30,12 +30,15 @@ const Cart = () => {
       toast.error(getError(error));
     }
   };
+
   const removeProductHandler = async (product) => {
     ctxDispatch({ type: PRODUCT_REMOVE_FROM_CART, payload: product });
   };
+
   const checkOutHandler = async () => {
     navigate("/signin?redirect=/shipping");
   };
+
   return (
     <div>
       <Title title={"Shopping Cart"}></Title>
