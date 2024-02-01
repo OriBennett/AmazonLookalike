@@ -65,11 +65,12 @@ const OrderSummary = ({ cart, status }) => {
                                         <Link to={`/products/${item.token}`}>{item.title}</Link>
                                     </Col>
                                     <Col md={2}><strong>Quantity: </strong><span>{item.quantity}</span></Col>
-                                    <Col md={2}>${item.price}</Col>   
+                                    <Col md={2}>${item.price}</Col>
                                 </Row>
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
+                    {status === "submitOrder"  && <Link to={`/cart`}>Edit</Link>}
                 </Card.Body>
             </Card>
         </>
