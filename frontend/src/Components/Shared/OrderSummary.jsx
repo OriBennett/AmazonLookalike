@@ -25,10 +25,10 @@ const OrderSummary = ({ cart, status, isDelivered }) => {
                         {cart.shippingAddress.country}
                     </Card.Text>
                     {status === "submitOrder" ?
-                        <></> :
+                        <Link to={`/shipping`}>Edit</Link> :
                         isDelivered ?
-                            <MessageBox variant="danger">Not Sent</MessageBox> :
-                            <MessageBox variant="success">Sent</MessageBox>
+                            <MessageBox variant="success">Sent</MessageBox> :
+                            <MessageBox variant="danger">Not Sent</MessageBox>
                     }
                 </Card.Body>
             </Card>
