@@ -8,19 +8,15 @@ export const isAuth = async (req, res, next) => {
   const auth = req.header.authorization
   if (auth) {
     const token = req.headers.authorization.split(" ")[1];
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET, (err, decode => {
-        if (err) res.status(401).send({ message: err.message })
-        else {
-          req.user = decode;
-          next()
-        }
-      }));
-    } 
-    catch (error) {
-      res.status(401).send({ message: "Not authorized, invalid token" });
-    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, (err, decode => {
+      if (err) res.status(401).send({ message: err.message })
+      else {
+        req.user = decode;
+        next()
+      }
+    }));
+
   } else {
-    res.status(401).send({ message: "Not authorized, invalid token" });
+    res.status(401).send({ message: "Not authorized, no token" });
   }
 };
