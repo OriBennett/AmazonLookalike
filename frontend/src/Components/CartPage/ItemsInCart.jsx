@@ -41,6 +41,7 @@ const ItemsInCart = ({
                     onClick={() => updateCartHandler(item, item.quantity + 1)}
                     name="plusButton"
                     variant="light"
+                    disabled={item.quantity === item.countInStock}
                   >
                     <i className="fa fa-plus-circle" />
                   </Button>
