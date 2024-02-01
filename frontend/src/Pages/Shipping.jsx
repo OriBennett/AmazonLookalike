@@ -9,10 +9,8 @@ import { SAVE_SHIPPING_ADDRESS } from "../actions";
 const Shipping = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const {
-    userInfo,
-    cart: { cartItems },
-  } = state;
+  const { userInfo, cart: { cartItems } } = state;
+
   useEffect(() => {
     if (cartItems.length === 0) {
       navigate("/");
@@ -26,11 +24,9 @@ const Shipping = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    ctxDispatch({type: SAVE_SHIPPING_ADDRESS, payload: data});
+    ctxDispatch({ type: SAVE_SHIPPING_ADDRESS, payload: data });
     navigate("/payment");
   };
-
-
 
   return (
     <div>

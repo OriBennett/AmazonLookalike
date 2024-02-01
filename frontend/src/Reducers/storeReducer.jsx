@@ -25,8 +25,8 @@ const storeReducer = (state, action) => {
       );
       const cartItems = existingItem
         ? state.cart.cartItems.map((item) =>
-            item._id === existingItem._id ? newItem : item
-          )
+          item._id === existingItem._id ? newItem : item
+        )
         : [...state.cart.cartItems, newItem];
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
@@ -45,6 +45,9 @@ const storeReducer = (state, action) => {
         ...state,
         cart: { ...state.cart, shippingAddress: shippingAddress },
       };
+    }
+    case SAVE_PAYMENT_METHOD: {
+      return { ...state, cart: { ...state.cart, paymentMethod: action.payload } };
     }
     default:
       return { ...state };
