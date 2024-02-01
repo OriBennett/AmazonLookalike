@@ -30,7 +30,7 @@ const SubmitOrder = () => {
             const { data } = await axios.post("/api/v1/orders", orderData, { headers: { authorization: `Bearer ${userInfo.token}` } })
             ctxDispatch({ type: CLEAR_CART })
             localStorage.removeItem("cartItems");
-            navigate(`/api/v1/orders/${data._id}`);
+            navigate(`/orders/${data.order._id}`);
         } catch (error) {
             toast.error(getError(error));
         }
