@@ -1,7 +1,7 @@
 import { Card, Col, Link, ListGroup, PropTypes, Row } from "../../imports"
 import MessageBox from "./MessageBox"
 
-const OrderSummary = ({ cart, status }) => {
+const OrderSummary = ({ cart, status, isDelivered }) => {
 
     return (
         <>
@@ -24,6 +24,12 @@ const OrderSummary = ({ cart, status }) => {
                         <strong>Country:</strong>
                         {cart.shippingAddress.country}
                     </Card.Text>
+                    {status === "submitOrder" ?
+                        <></> :
+                        isDelivered ?
+                            <MessageBox variant="danger">Not Sent</MessageBox> :
+                            <MessageBox variant="success">Sent</MessageBox>
+                    }
                 </Card.Body>
             </Card>
             <Card className="mb-3">
@@ -70,7 +76,7 @@ const OrderSummary = ({ cart, status }) => {
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
-                    {status === "submitOrder"  && <Link to={`/cart`}>Edit</Link>}
+                    {status === "submitOrder" && <Link to={`/cart`}>Edit</Link>}
                 </Card.Body>
             </Card>
         </>
