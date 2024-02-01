@@ -12,7 +12,17 @@ const addOrder = async (req, res) => {
         user: req.user._id
     })
     const order = await newOrder.save()
-    res.status(201).send({ message: 'Order added successfully' }, order);
+    res.status(201).send({ message: 'Order added successfully', order });
 };
 
-export { addOrder };
+const getOrderById = async (req, res) => {
+    const { id } = req.params
+    const order = await Order.findById(id)
+    if (order) {
+        res.status(200).send({ message: 'Order found', order })
+    } else {
+        res.status(404).send({ message: "Order not found" })
+    }
+};
+
+export { addOrder, getOrderById };
