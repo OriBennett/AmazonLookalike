@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { getError } from "../utils.jsx";
 import Title from "../Components/Shared/Title.jsx";
 import CheckoutSteps from "../Components/Shared/CheckoutSteps.jsx";
+import { Col, Row } from "../imports.js";
+import OrderSummary from "../Components/Shared/OrderSummary.jsx";
 
 const SubmitOrder = () => {
     const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -52,7 +54,7 @@ const SubmitOrder = () => {
             <h1 className="my-3">Order Summary</h1>
             <Row>
                 <Col md={8}>
-                    <OrderSummary cart={cart} />
+                    <OrderSummary cart={cart} status={"submitOrder"} />
                 </Col>
                 <Col md={4}>
                     {/* <Checkout cartItems={cartItems} checkOutHandler={checkOutHandler} /> */}
