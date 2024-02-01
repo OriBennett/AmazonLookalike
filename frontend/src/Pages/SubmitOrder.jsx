@@ -5,14 +5,15 @@ import { toast } from "react-toastify";
 import { getError } from "../utils.jsx";
 import Title from "../Components/Shared/Title.jsx";
 import CheckoutSteps from "../Components/Shared/CheckoutSteps.jsx";
-import { Col, Row } from "../imports.js";
+import { Col, Row, axios } from "../imports.js";
 import OrderSummary from "../Components/Shared/OrderSummary.jsx";
 import PaymentSummary from "../Components/Shared/PaymentSummary.jsx";
+import { CLEAR_CART } from "../actions.jsx";
 
 const SubmitOrder = () => {
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart, userInfo } = state;
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,9 +26,11 @@ const SubmitOrder = () => {
     const submitOrderHandler = async () => {
         try {
             setLoading(true);
-            // Post request addOrder
-            // Delete cartItems from state and localStorage
-            // go to OrderDetails page /id of order
+            const orderData = { orderItems: cart.cartItems, shippingAddress: cart.shippingAddress, paymentMethod: cart.paymentMethod, itemsPrice: cart.itemsPrice, shippingPrice: cart.shippingPrice, taxPrice: cart.taxPrice, totalPrice: cart.totalPrice }
+            const { data } = await axios.post("/api/v1/orders", orderData, { headers: { authorization: `Bearer ${userInfo.token}` } })
+            ctxDispatch({ type: CLEAR_CART })
+            localStorage.removeItem("cartItems");
+            navigate(`/api/v1/orders/${data._id}`);
         } catch (error) {
             toast.error(getError(error));
         }
