@@ -19,6 +19,7 @@ const SignIn = () => {
   const redirectUrl = new URLSearchParams(search);
   const redirectValue = redirectUrl.get("redirect");
   const redirect = redirectValue ? redirectValue : "/";
+
   useEffect(() => {
     if (userInfo) navigate(redirect);
   }, [navigate, redirect, userInfo]);
@@ -37,6 +38,7 @@ const SignIn = () => {
       toast.error(getError(error));
     }
   };
+  
   return (
     <Container className="small-container">
       <Title title="SignIn Page" />

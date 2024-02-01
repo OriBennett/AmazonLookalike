@@ -4,6 +4,7 @@ import {
   PRODUCT_ADD_TO_CART,
   PRODUCT_REMOVE_FROM_CART,
   SAVE_SHIPPING_ADDRESS,
+  SAVE_PAYMENT_METHOD,
 } from "../actions";
 
 const storeReducer = (state, action) => {

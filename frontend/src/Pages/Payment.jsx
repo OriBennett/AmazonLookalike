@@ -1,9 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import Title from "../Components/Shared/Title";
 import CheckoutSteps from "../Components/Shared/CheckoutSteps";
-import { Form } from "../imports";
+import { Button, Form } from "../imports";
 import { SAVE_PAYMENT_METHOD } from "../actions";
 
 const Payment = () => {
@@ -14,7 +14,6 @@ const Payment = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-
         ctxDispatch({ type: SAVE_PAYMENT_METHOD, payload: paymentMethodName });
         localStorage.setItem('paymentMethod', paymentMethodName);
         console.log(state);
@@ -48,7 +47,7 @@ const Payment = () => {
                             onChange={(e) => setPaymentMethodName(e.target.value)} />
                     </div>
                     <div className="mb-3">
-                        <Button type="sumbit">Continue</Button>
+                        <Button variant="primary" type="sumbit">Continue</Button>
                     </div>
                 </Form>
             </div>
