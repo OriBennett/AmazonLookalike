@@ -45,9 +45,9 @@ const OrderSummary = ({ cart, status, isDelivered }) => {
                     </Card.Text>
                     {status === "submitOrder" ?
                         <Link to="/payment">Edit</Link> :
-                        status === "details-unpaid" ?
-                            <MessageBox variant="danger">Not Paid</MessageBox> :
-                            <MessageBox variant="success">Paid</MessageBox>
+                        status === "isPaid" ?
+                            <MessageBox variant="success">Paid</MessageBox> :
+                            <MessageBox variant="danger">Not Paid</MessageBox>
                     }
                 </Card.Body>
             </Card>
