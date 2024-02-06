@@ -1,10 +1,13 @@
 import { useEffect, useReducer, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import searchPageReducer from "../Reducers/searchPageReducer";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getError } from "../utils";
+import { getError, getFilterURI } from "../utils";
 import { GET_FAIL, GET_REQUEST, GET_SUCCESS } from "../actions";
+import Title from "../Components/Shared/Title";
+import { Col, Row } from "../imports";
+import Rating from "../Components/Shared/Rating";
 
 const prices = [
   { name: "$1-$50", value: "1-50" },
@@ -61,7 +64,86 @@ const Search = () => {
     getProducts();
   }, [category, order, page, price, query, rating]);
 
-  return <div>Search</div>;
+  return (
+    <div>
+      <Title title="Search Page" />
+      <Row>
+        <Col md={3}>
+          <h3>Categories:</h3>
+          <div>
+            <ul>
+              <li>
+                <Link
+                  className={"all" === category ? "text-bold" : ""} //doesn't work
+                  to={getFilterURI(search, { category: "all" })} 
+                >
+                  Any
+                </Link>
+              </li>
+              {categories.map((categoryLocal) => (
+                <li key={categoryLocal}>
+                  <Link
+                    className={categoryLocal === category ? "text-bold" : ""}
+                    to={getFilterURI(search, { category: categoryLocal })}
+                  >
+                    {categoryLocal}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <h3>Price:</h3>
+          <div>
+            <ul>
+              <li>
+              <Link
+                  className={"all" === price ? "text-bold" : ""} //doesn't work
+                  to={getFilterURI(search, { price: "all" })} 
+                >
+                Any
+              </Link>
+              </li>
+              {prices.map((priceLocal) => (
+                <li key={priceLocal.value}>
+                  <Link
+                    className={priceLocal.value === price ? "text-bold" : ""}
+                    to={getFilterURI(search, { price: priceLocal.value })}
+                  >
+                    {priceLocal.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <h3>Reviews:</h3>
+          <div>
+            <ul>
+              <li>
+              <Link
+                  className={"all" === rating ? "text-bold" : ""} //doesn't work
+                  to={getFilterURI(search, { price: "all" })} 
+                >
+                Any
+              </Link>
+              </li>
+              {ratings.map((ratingLocal) => (
+                <li key={ratingLocal.rating}>
+                  <Link
+                    className={ratingLocal.rating === rating ? "text-bold" : ""}
+                    to={getFilterURI(search, { rating: ratingLocal.rating })}
+                  >
+                    {ratingLocal.name}
+                    <Rating rating={ratingLocal.rating} caption={' '}/>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Col>
+        <Col md={9}></Col>
+      </Row>
+    </div>
+  );
 };
 
 export default Search;
