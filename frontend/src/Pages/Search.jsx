@@ -1,6 +1,10 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import searchPageReducer from "../Reducers/searchPageReducer";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../utils";
+import { GET_FAIL, GET_REQUEST, GET_SUCCESS } from "../actions";
 
 const prices = [
   { name: "$1-$50", value: "1-50" },
@@ -29,6 +33,34 @@ const Search = () => {
 
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(searchPageReducer, { loading: true, error: "" });
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const { data } = await axios.get("/api/v1/products/categories");
+        setCategories(data);
+      } catch (error) {
+        toast.error(getError(error));
+      }
+    };
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        dispatch({ type: GET_REQUEST });
+        const { data } = await axios.get(
+          `/api/v1/products//search?category=${category}&query=${query}&price=${price}&rating=${rating}&order=${order}&page=${page}`
+        );
+        dispatch({ type: GET_SUCCESS, payload: data });
+      } catch (error) {
+        dispatch({ type: GET_FAIL, payload: getError(error) });
+      }
+    };
+    getProducts();
+  }, [category, order, page, price, query, rating]);
+
   return <div>Search</div>;
 };
 
