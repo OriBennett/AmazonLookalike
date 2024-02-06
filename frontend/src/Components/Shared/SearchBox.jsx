@@ -9,18 +9,18 @@ import { getFilterURI } from "../../utils";
 const SearchBox = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const {search} = useLocation();
+  const { search } = useLocation();
   useEffect(() => {
     if (!query) {
       return;
     }
-    const filterURI = getFilterURI(search, {query: query});
+    const filterURI = getFilterURI(search, { query: query });
     navigate(filterURI);
   }, [query]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const filterURI = getFilterURI(search, {query: query});
+    const filterURI = getFilterURI(search, { query: query });
     navigate(filterURI);
   };
 
