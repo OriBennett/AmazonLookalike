@@ -11,6 +11,7 @@ const productsRouter = express.Router();
 
 productsRouter.get("/", expressAsyncHandler(getProducts));
 productsRouter.get("/categories", expressAsyncHandler(getCategories));
+// productsRouter.get("/search", expressAsyncHandler(getCategories));
 productsRouter.get("/token/:token", expressAsyncHandler(getProductByToken));
 productsRouter.get("/:id", expressAsyncHandler(getProductById));
 

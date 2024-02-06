@@ -6,8 +6,10 @@ import { toast } from "react-toastify";
 import { getError, getFilterURI } from "../utils";
 import { GET_FAIL, GET_REQUEST, GET_SUCCESS } from "../actions";
 import Title from "../Components/Shared/Title";
-import { Col, Row } from "../imports";
+import { Button, Col, Row } from "../imports";
 import Rating from "../Components/Shared/Rating";
+import Loading from "../Components/Shared/Loading";
+import MessageBox from "../Components/Shared/MessageBox";
 
 const prices = [
   { name: "$1-$50", value: "1-50" },
@@ -75,7 +77,7 @@ const Search = () => {
               <li>
                 <Link
                   className={"all" === category ? "text-bold" : ""} //doesn't work
-                  to={getFilterURI(search, { category: "all" })} 
+                  to={getFilterURI(search, { category: "all" })}
                 >
                   Any
                 </Link>
@@ -96,12 +98,12 @@ const Search = () => {
           <div>
             <ul>
               <li>
-              <Link
+                <Link
                   className={"all" === price ? "text-bold" : ""} //doesn't work
-                  to={getFilterURI(search, { price: "all" })} 
+                  to={getFilterURI(search, { price: "all" })}
                 >
-                Any
-              </Link>
+                  Any
+                </Link>
               </li>
               {prices.map((priceLocal) => (
                 <li key={priceLocal.value}>
@@ -119,12 +121,12 @@ const Search = () => {
           <div>
             <ul>
               <li>
-              <Link
+                <Link
                   className={"all" === rating ? "text-bold" : ""} //doesn't work
-                  to={getFilterURI(search, { price: "all" })} 
+                  to={getFilterURI(search, { price: "all" })}
                 >
-                Any
-              </Link>
+                  Any
+                </Link>
               </li>
               {ratings.map((ratingLocal) => (
                 <li key={ratingLocal.rating}>
@@ -133,14 +135,57 @@ const Search = () => {
                     to={getFilterURI(search, { rating: ratingLocal.rating })}
                   >
                     {ratingLocal.name}
-                    <Rating rating={ratingLocal.rating} caption={' '}/>
+                    <Rating rating={ratingLocal.rating} caption={" "} />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
         </Col>
-        <Col md={9}></Col>
+        <Col md={9}>
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <>
+              <Row>
+                <Col md={6}>
+                  <div>
+                    {countProducts === 0 ? "No" : countProducts} Results
+                    {query !== "all" && " : " + query}
+                    {category !== "all" && " : " + category}
+                    {price !== "all" && " : Price " + price}
+                    {rating !== "all" && " : Rating" + rating + " & up"}
+                    {query !== "all" ||
+                    category !== "all" ||
+                    price !== "all" ||
+                    rating !== "all" ? (
+                      <Button
+                        variant="light"
+                        onClick={() =>
+                          navigate(
+                            getFilterURI(search, {
+                              query: "all",
+                              category: "all",
+                              price: "all",
+                              rating: "all",
+                              order: "newest",
+                              page: 1,
+                            })
+                          )
+                        }
+                      >
+                        <i className="fas fa-times-circle" />
+                      </Button>
+                    ) : null}
+                  </div>
+                </Col>
+                <Col md={6}></Col>
+              </Row>
+            </>
+          )}
+        </Col>
       </Row>
     </div>
   );
