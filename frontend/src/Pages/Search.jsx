@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import { getError, getFilterURI } from "../utils";
 import { GET_FAIL, GET_REQUEST, GET_SUCCESS } from "../actions";
 import Title from "../Components/Shared/Title";
-import { Button, Col, Row } from "../imports";
+import { Button, Col, LinkContainer, Row } from "../imports";
 import Rating from "../Components/Shared/Rating";
 import Loading from "../Components/Shared/Loading";
 import MessageBox from "../Components/Shared/MessageBox";
+import Product from "../Components/HomePage/Product";
 
 const prices = [
   { name: "$1-$50", value: "1-50" },
@@ -181,8 +182,53 @@ const Search = () => {
                     ) : null}
                   </div>
                 </Col>
-                <Col md={6}></Col>
+                <Col className="text-end">
+                  Sort by{" "}
+                  <select
+                    value={order}
+                    onChange={(e) => {
+                      navigate(getFilterURI(search, { order: e.target.value }));
+                    }}
+                  >
+                    <option value="newest">Newest Arrivals</option>
+                    <option value="lowest">Price: Low to High</option>
+                    <option value="highest">Price: High to Low</option>
+                    <option value="toprated">Customer Reviews</option>
+                  </select>
+                </Col>
               </Row>
+              {products.length === 0 && (
+                <MessageBox>No Product Found</MessageBox>
+              )}
+              <Row>
+                {products.map((product) => (
+                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
+                    <Product product={product}></Product>
+                  </Col>
+                ))}
+              </Row>
+
+              <div>
+                {[...Array(pages).keys()].map((x) => (
+                  <LinkContainer
+                    key={x + 1}
+                    className="mx-1"
+                    to={{
+                      pathname: "/search",
+                      search: getFilterURI(search, { page: x + 1 }, true),
+                    }}
+                  >
+                    <Button
+                      className={
+                        Number(page) === x + 1 ? "highlight-current-page" : ""
+                      }
+                      variant="light"
+                    >
+                      {x + 1}
+                    </Button>
+                  </LinkContainer>
+                ))}
+              </div>
             </>
           )}
         </Col>
