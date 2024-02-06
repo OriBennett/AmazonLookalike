@@ -10,16 +10,22 @@ const getProductById = async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({message: 'Product not found'});
+    res.status(404).send({ message: "Product not found" });
   }
 };
 
 const getProductByToken = async (req, res) => {
-  const product = await Product.findOne({token: req.params.token});
+  const product = await Product.findOne({ token: req.params.token });
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({message: "Product not found"});
+    res.status(404).send({ message: "Product not found" });
   }
 };
-export { getProducts, getProductById, getProductByToken };
+
+const getCategories = async (req, res) => {
+  const categories = await Product.find().distinct("category");
+  res.send(categories);
+};
+
+export { getProducts, getProductById, getProductByToken, getCategories };

@@ -51,7 +51,7 @@ const Search = () => {
       try {
         dispatch({ type: GET_REQUEST });
         const { data } = await axios.get(
-          `/api/v1/products//search?category=${category}&query=${query}&price=${price}&rating=${rating}&order=${order}&page=${page}`
+          `/api/v1/products/search?category=${category}&query=${query}&price=${price}&rating=${rating}&order=${order}&page=${page}`
         );
         dispatch({ type: GET_SUCCESS, payload: data });
       } catch (error) {
