@@ -25,7 +25,7 @@ const ItemsInCart = ({
                   />
                 </Col>
                 <Col md={5}>
-                  <Link to={`/products/${item.token}`}>{item.title}</Link>
+                  <Link to={`/product/${item.token}`}>{item.title}</Link>
                 </Col>
                 <Col md={2}>
                   <Button
